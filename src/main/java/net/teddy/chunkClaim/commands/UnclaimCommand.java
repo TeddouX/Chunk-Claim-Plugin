@@ -10,6 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -47,6 +49,11 @@ public class UnclaimCommand implements CommandExecutor {
             if (armorStand.getPersistentDataContainer().has(ClaimsUtils.playerKey))
                 entity.remove();
         }
+
+        PersistentDataContainer playerPdc = player.getPersistentDataContainer();
+
+        int playerClaimsAmount = playerPdc.get(ClaimsUtils.claimsAmountKey, PersistentDataType.INTEGER);
+        playerPdc.set(ClaimsUtils.claimsAmountKey, PersistentDataType.INTEGER, playerClaimsAmount - 1);
 
         player.sendMessage(ChatColor.translateAlternateColorCodes('&',
                 ChunkClaim.getInstance().getConfig().getString("chunkclaim_command_chunk_unclaimed")));

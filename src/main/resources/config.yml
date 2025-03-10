@@ -1,5 +1,6 @@
 # Variables
-chunkclaim_armorstand_spawn_height: -66
+chunkclaim_max_claims: 25
+chunkclaim_armorstand_spawn_height: -67
 
 # Success
 chunkclaim_command_chunk_claimed: "&aChunk claimed."
@@ -7,5 +8,6 @@ chunkclaim_command_chunk_unclaimed: "&aChunk unclaimed."
 
 # Errors
 chunkclaim_command_chunk_already_claimed: "&cThis chunk is already claimed."
+chunkclaim_command_max_claims_exceeded: "&cYour maximum number of claims was exceeded."
 chunkclaim_command_chunk_not_claimed: "&cThis chunk isn't claimed."
 chunkclaim_command_chunk_isnt_yours: "&cCannot unclaim a claim that isn't yours."

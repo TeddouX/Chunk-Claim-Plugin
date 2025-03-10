@@ -24,11 +24,6 @@ public final class ChunkClaim extends JavaPlugin {
 
     }
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
-
     public static ChunkClaim getInstance() {
         return instance;
     }

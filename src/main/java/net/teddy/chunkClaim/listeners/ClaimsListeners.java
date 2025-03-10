@@ -8,10 +8,21 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.UUID;
 
 public class ClaimsListeners implements Listener {
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+
+        if (!player.hasPlayedBefore()) {
+            player.getPersistentDataContainer().set(ClaimsUtils.claimsAmountKey, PersistentDataType.INTEGER, 0);
+        }
+    }
 
     @EventHandler
     public void onBlockBroken(BlockBreakEvent event) {

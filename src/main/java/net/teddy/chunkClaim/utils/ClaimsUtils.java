@@ -14,6 +14,7 @@ import java.util.UUID;
 public class ClaimsUtils {
 
     public static NamespacedKey playerKey = new NamespacedKey(ChunkClaim.getInstance(), "player");
+    public static NamespacedKey claimsAmountKey = new NamespacedKey(ChunkClaim.getInstance(), "claims_amount");
     public static NamespacedKey claimedInstantKey = new NamespacedKey(ChunkClaim.getInstance(), "claimed_instant");
 
     public static boolean isChunkClaimed(Chunk chunk) {

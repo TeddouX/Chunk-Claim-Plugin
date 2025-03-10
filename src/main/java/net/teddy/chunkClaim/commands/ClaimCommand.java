@@ -36,16 +36,32 @@ public class ClaimCommand implements CommandExecutor {
         int chunkMiddleZ = chunk.getZ() * 16 + 8;
         int spawnHeight = ChunkClaim.getInstance().getConfig().getInt("chunkclaim_armorstand_spawn_height");
 
+        // Summon armor stand
         ArmorStand armorStand = player.getWorld().spawn(new Location(player.getWorld(), chunkMiddleX, spawnHeight, chunkMiddleZ), ArmorStand.class);
         armorStand.setCustomName("%s %s, %s".formatted(chunkMiddleX, chunkMiddleZ, player.getUniqueId()));
         armorStand.setGravity(false);
-        armorStand.setVisible(false);
+        armorStand.setVisible(true);
         armorStand.setCustomNameVisible(true);
         armorStand.setInvulnerable(true);
 
-        PersistentDataContainer pdc = armorStand.getPersistentDataContainer();
-        pdc.set(ClaimsUtils.playerKey, DataType.UUID, player.getUniqueId());
-        pdc.set(ClaimsUtils.claimedInstantKey, PersistentDataType.LONG, System.currentTimeMillis());
+        // Set armor stand data
+        PersistentDataContainer armorStandPdc = armorStand.getPersistentDataContainer();
+        armorStandPdc.set(ClaimsUtils.playerKey, DataType.UUID, player.getUniqueId());
+        armorStandPdc.set(ClaimsUtils.claimedInstantKey, PersistentDataType.LONG, System.currentTimeMillis());
+
+        // Set the player's claim amount
+        PersistentDataContainer playerPdc = player.getPersistentDataContainer();
+        int playerClaimsAmount = playerPdc.get(ClaimsUtils.claimsAmountKey, PersistentDataType.INTEGER);
+        int maxClaims = ChunkClaim.getInstance().getConfig().getInt("chunkclaim_max_claims");
+
+        if (playerClaimsAmount + 1 > maxClaims) {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                    ChunkClaim.getInstance().getConfig().getString("chunkclaim_command_max_claims_exceeded")));
+
+            return true;
+        }
+
+        playerPdc.set(ClaimsUtils.claimsAmountKey, PersistentDataType.INTEGER, playerClaimsAmount);
 
         player.sendMessage(ChatColor.translateAlternateColorCodes('&',
                 ChunkClaim.getInstance().getConfig().getString("chunkclaim_command_chunk_claimed")));
