@@ -1,5 +1,5 @@
 # Variables
-chunkclaim_armorstand_spawn_height: 64
+chunkclaim_armorstand_spawn_height: -66
 
 # Success
 chunkclaim_command_chunk_claimed: "&aChunk claimed."

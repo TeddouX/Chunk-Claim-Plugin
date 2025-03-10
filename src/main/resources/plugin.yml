@@ -9,3 +9,17 @@ commands:
   unclaim:
     description: Unclaims the chunk you're currently in
     usage: /<command>
+  claiminfo:
+    description: See information about the claimed chunk
+    usage: /<command>
+    permission: chunkclaim.see_claim_info
+    permission-message: You do not have permission to use this command.
+
+permissions:
+  chunkclaim:
+    edit_claims:
+      description: Permission to edit claims
+      default: op
+    see_claim_info:
+      description: Permission to see information about claimed chunks
+      default: op
