@@ -6,3 +6,6 @@ commands:
   claim:
     description: Claims the chunk you're currently in
     usage: /<command>
+  unclaim:
+    description: Unclaims the chunk you're currently in
+    usage: /<command>
